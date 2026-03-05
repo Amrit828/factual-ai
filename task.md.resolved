@@ -1,0 +1,25 @@
+# AI Misinformation Detection System - Tasks
+
+## 1. Project Initialization
+- [ ] Initialize `backend` directory and set up Python environment
+- [ ] Create `frontend` React app using Vite (`npx create-vite@latest frontend --template react`)
+- [ ] Install Tailwind CSS in `frontend`
+
+## 2. Backend Implementation (FastAPI)
+- [ ] Set up `backend/main.py` and CORS middleware
+- [ ] Create `backend/api/routes.py` with endpoints `/verify_article` and `/verify_claim`
+- [ ] Implement `backend/llm/` module for Ollama (`qwen2.5:7b`) integration
+- [ ] Implement `backend/retrieval/` module to handle FAISS vector DB and `bge-small-en` embeddings
+- [ ] Implement `backend/pipeline/` logic for sentence segmentation, claim filtering, retrieval, and reasoning
+- [ ] Handle persistent storage in `backend/storage/` (index.faiss & metadata)
+
+## 3. Frontend Implementation (React & Tailwind)
+- [ ] Clean up default Vite boilerplate and configure layout
+- [ ] Build Application UI (Input textarea for raw article, Submission button)
+- [ ] Implement API client to communicate with FastAPI backend
+- [ ] Build Real-time Results Panel with dynamic verdict badges (Supported, Refuted, Unverifiable)
+- [ ] Display extracted claims, verdict, reasoning, and evidence sources
+
+## 4. End-to-End Integration
+- [ ] Test the full pipeline with sample articles containing factual claims
+- [ ] Verify error handling and UI loading states

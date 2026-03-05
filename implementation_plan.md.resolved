@@ -1,0 +1,36 @@
+# Implementation Plan: AI Misinformation Detection System
+
+## Goal
+Build an end-to-end AI system that analyzes articles, extracts verifiable factual claims, retrieves evidence from a FAISS-indexed knowledge base, and determines if claims are Supported, Refuted, or Unverifiable.
+
+## Proposed Changes
+
+### Backend Setup
+- Initialize Python environment in `misinformation-detector/backend`.
+- Install dependencies: `fastapi`, `uvicorn`, `sentence-transformers`, `faiss-cpu`, `ollama`, `pydantic`.
+- Create the core directories and empty initialization files.
+
+### Backend Core Implementation
+- **main.py & api/routes.py:** Setup FastAPI, CORS, and two main routes (`/verify_article`, `/verify_claim`).
+- **llm/client.py:** Setup integration with local Ollama (`qwen2.5:7b`). This handles prompt generation and JSON parsing for verification results.
+- **retrieval/faiss_index.py:** Abstract FAISS vector operations. Initialize an empty FAISS index with `bge-small-en` dimensions (384) that can map to source text.
+- **pipeline/verifier.py:** Integrate segmentation -> claim extraction -> retrieval -> reasoning.
+
+### Frontend Setup
+- Create React application in `misinformation-detector/frontend` using Vite.
+- Configure TailwindCSS for premium aesthetics.
+- Add components for:
+  - Input form (textarea, submit button).
+  - Results view displaying extracted claims and their verdicts.
+  - Evidence viewer.
+
+## Verification Plan
+
+### Automated Tests
+- Run backend locally on `http://localhost:8000`. Test `/verify_claim` with a mocked query via curl or Postman.
+- Check Ollama model connection (ensure `qwen2.5:7b` is running).
+
+### Manual Verification
+- Start both frontend (`npm run dev`) and backend servers.
+- Submit a sample article containing known verifiable claims (e.g., "The Earth orbits the Sun.").
+- Observe real-time frontend feedback, extracted claims, FAISS retrieval logs, and the LLM verdict.
